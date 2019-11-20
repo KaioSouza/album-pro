@@ -183,6 +183,7 @@ export default {
     }
   },
   async created () {
+   
     const data = await this.$store.dispatch('album/GET_ALBUNS')
     console.log(data)
     if (data) {
