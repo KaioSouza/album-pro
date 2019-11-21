@@ -193,7 +193,7 @@
 
 <script>
 export default {
-  //middleware: 'authenticated',
+  middleware: 'authenticated',
   data: () => ({
     files: null,
     album: [],
@@ -210,11 +210,8 @@ export default {
   }),
   async created () {
     const data = await this.$store.dispatch('album/GET_ALBUM', this.$route.params.id)
-    console.log(data)
     if (data) {
       this.album = this.$store.state.album.album
-
-      console.log(this.album)
     }
   },
   methods: {

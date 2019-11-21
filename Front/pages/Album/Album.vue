@@ -76,7 +76,9 @@
                       </v-card-actions>
                     </v-card>
                   </v-dialog>
-                  <div v-if="getUser.perfilAcesso === 'Fotografo'">
+                  <div v-if="getUser">
+
+                   <div v-if="getUser.perfilAcesso === 'Fotografo'">
                   <v-btn
                     @click.stop="dialog = true"
                     color="primary"
@@ -89,6 +91,8 @@
                     Criar Novo Álbum
                   </v-btn>
                   </div>
+                  </div>
+                 
                 </div>
               </v-col>
             </v-row>
@@ -159,7 +163,7 @@
 
 <script>
 export default {
-  //middleware: 'authenticated',
+  middleware: 'authenticated',
   data: () => ({
     albuns: [],
     dialog: false,
@@ -187,10 +191,8 @@ export default {
   async created () {
    
     const data = await this.$store.dispatch('album/GET_ALBUNS')
-    console.log(data)
     if (data) {
       this.albuns = this.$store.state.album.albuns
-      console.log(this.albuns)
     }
   },
   methods: {

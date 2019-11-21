@@ -1,8 +1,11 @@
 export default function ({ store, redirect, route }) {
-  console.log('usuario logado:')
-  console.log(!store.getters['auth/USER_LOGGED_IN'])
-  if (!store.getters['auth/USER_LOGGED_IN'] && route.path !== '/') {
-    console.log('entrou no redirect')
+
+  const logado = store.getters['usuario/USER_LOGGED_IN']
+  const routePath = route.path
+
+  if (logado === false && routePath !== '/') {
     return redirect('/')
+  } else if (logado === true && routePath === '/') {
+    return redirect('/album/album')
   }
 }
