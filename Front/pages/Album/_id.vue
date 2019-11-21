@@ -129,7 +129,9 @@
               <v-col
                 v-for="foto in album.fotos"
                 :key="foto.id"
-                :cols="3"
+                :cols="12"
+                sm="12"
+                md="3"
               >
                 <v-card
                   class="mx-auto"

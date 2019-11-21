@@ -99,7 +99,9 @@
               <v-col
                 v-for="album in albuns"
                 :key="album.id"
-                :cols="3"
+                :cols="12"
+                sm="12"
+                md="3"
               >
                 <v-card
                   class="mx-auto"
