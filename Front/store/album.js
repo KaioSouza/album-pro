@@ -114,6 +114,7 @@ export const actions = {
   async PUT_FOTO ({ commit }, payload) {
     try {
       commit('PUT_FOTO', payload)
+      return true
     } catch (error) {
     }
   },

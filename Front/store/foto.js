@@ -71,9 +71,10 @@ export const actions = {
       const data = await this.$axios.$put('http://localhost:57987/foto', payload)
       if (data) {
         const result = await dispatch('album/PUT_FOTO', payload, { root: true })
+        return result
       }
 
-      return result
+      return !!data
     } catch (error) {
     }
   }, 
@@ -84,7 +85,7 @@ export const actions = {
       if (data) {
         const result = await dispatch('album/DELETE_FOTO', payload, { root: true })
       }
-      return result
+      return !!data
     } catch (error) {
     }
   }

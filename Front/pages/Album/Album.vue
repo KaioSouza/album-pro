@@ -158,6 +158,19 @@
         </v-card>
       </v-col>
     </v-row>
+    <v-snackbar
+      v-model="snackbar.show"
+      color="success"
+    >
+      {{ snackbar.text }}
+      <v-btn
+        color="white"
+        text
+        @click="snackbar.show = false"
+      >
+        ok
+      </v-btn>
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -175,6 +188,10 @@ export default {
     },
     images: {
       album: require('@/static/album-compressed.png')
+    },
+     snackbar: {
+      show: false,
+      text: ''
     }
   }),
   computed: {
@@ -203,6 +220,8 @@ export default {
       const data = await this.$store.dispatch('album/POST_ALBUM', payload)
       if (data) {
         this.albuns = this.$store.state.album.albuns
+        this.snackbar.text = 'Álbum Criado!'
+        this.snackbar.show = true
       }
       this.nomeNovoAlbum = ''
     },
@@ -210,6 +229,8 @@ export default {
       const data = await this.$store.dispatch('album/DELETE_ALBUM', id)
       if (data) {
         this.albuns = this.$store.state.album.albuns
+        this.snackbar.text = 'Álbum Excluido!'
+        this.snackbar.show = true
       }
     },
     async atualizar () {
@@ -217,6 +238,8 @@ export default {
       const data = await this.$store.dispatch('album/PUT_ALBUM', payload)
       if (data) {
         this.albuns = this.$store.state.album.albuns
+        this.snackbar.text = 'Álbum Atualizado!'
+        this.snackbar.show = true
       }
     }
   }

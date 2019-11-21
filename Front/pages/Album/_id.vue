@@ -188,6 +188,19 @@
         </v-card>
       </v-col>
     </v-row>
+    <v-snackbar
+      v-model="snackbar.show"
+      color="success"
+    >
+      {{ snackbar.text }}
+      <v-btn
+        color="white"
+        text
+        @click="snackbar.show = false"
+      >
+        ok
+      </v-btn>
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -206,6 +219,10 @@ export default {
     dialogAtualizar: false,
     images: {
       album: require('@/static/album-compressed.png')
+    },
+    snackbar: {
+      show: false,
+      text: ''
     }
   }),
   async created () {
@@ -225,6 +242,8 @@ export default {
       const result = await this.$store.dispatch('foto/POST_FOTOS', obj)
       if (result) {
         this.album = this.$store.state.album.album
+        this.snackbar.text = 'Foto(s) Adicionada(s)!'
+        this.snackbar.show = true
       }
     },
     async passarParametro (foto) {
@@ -239,8 +258,12 @@ export default {
     async atualizar(){
     
       const result = await this.$store.dispatch('foto/PUT_FOTO', this.novafoto)
+      debugger
       if (result) {
         this.album = this.$store.state.album.album
+        debugger
+        this.snackbar.text = 'Foto Atualizada!'
+        this.snackbar.show = true
       }
     },
      async deletar(){
@@ -248,6 +271,8 @@ export default {
       const result = await this.$store.dispatch('foto/DELETE_FOTO', this.novafoto)
       if (result) {
         this.album = this.$store.state.album.album
+        this.snackbar.text = 'Foto Excluída!'
+        this.snackbar.show = true
       }
     }
   }
